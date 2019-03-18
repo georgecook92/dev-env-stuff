@@ -1,0 +1,129 @@
+{
+  /*
+    // Place your snippets for JavaScript here. Each snippet is defined under a snippet name and has a prefix, body and 
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+    // same ids are connected.
+    // Example:
+    "Print to console": {
+      "prefix": "log",
+      "body": [
+        "console.log('$1');",
+        "$2"
+      ],
+      "description": "Log output to console"
+    }
+  */
+  "Connect_Component": {
+    "prefix": "conn-both",
+    "body": [
+        "import { connect } from 'react-redux'",
+        "import ${TM_DIRECTORY/(.*)\\/(.*)$/$2/} from './${TM_DIRECTORY/(.*)\\/(.*)$/$2/}'",
+        "",
+        "const mapStateToProps = state => ({})",
+        "",
+        "const mapDispatchToProps = dispatch => ({})",
+        "",
+        "export default connect(mapStateToProps, mapDispatchToProps)(${TM_DIRECTORY/(.*)\\/(.*)$/$2/})",
+        ""
+    ],
+    "description": "Connect component"
+  },
+  "Connect_Component_Merge_Props": {
+    "prefix": "conn-merge-props",
+    "body": [
+        "import { connect } from 'react-redux'",
+        "import ${TM_DIRECTORY/(.*)\\/(.*)$/$2/} from './${TM_DIRECTORY/(.*)\\/(.*)$/$2/}'",
+        "",
+        "const mapStateToProps = state => ({ state })",
+        "",
+        "const mapDispatchToProps = dispatch => ({ dispatch })",
+        "",
+        "const mergeProps = ({ state }, { dispatch }, ownProps) => {",
+        "  return {",
+        "    ...ownProps",
+        "  }",
+        "}",
+        "",
+        "export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(${TM_DIRECTORY/(.*)\\/(.*)$/$2/})",
+        ""
+    ],
+    "description": "Connect component"
+  },
+  "Redux_Middleware": {
+    "prefix": "redux-middleware",
+    "body": [
+      "$name = ({ dispatch, getState }) => next => action => {",
+      "  next(action)",
+      "}"
+    ],
+    "description": "Standard redux middleware boilerplate"
+  },
+  "Functional_React_Component": {
+    "prefix": "functional-component",
+    "body": [
+      "import React from 'react'",
+      "import PropTypes from 'prop-types'",
+      "import { withStyles } from 'material-ui/styles'",
+      "import style from './style'",
+      "",
+      "const ${TM_DIRECTORY/(.*)\\/(.*)$/$2/} = ({ classes }) => {",
+      "  return (",
+      "    <div></div>",
+      "  )",
+      "}",
+      "",
+      "${TM_DIRECTORY/(.*)\\/(.*)$/$2/}.propTypes = {",
+      "",
+      "}",
+      "",
+      "export default withStyles(style)(${TM_DIRECTORY/(.*)\\/(.*)$/$2/})",
+      ""
+    ]
+  },
+  "Export from index": {
+    "prefix": "index-export",
+    "body": [
+      "import ${TM_DIRECTORY/(.*)\\/(.*)$/$2/} from './${TM_DIRECTORY/(.*)\\/(.*)$/$2/}'",
+      "",
+      "export default ${TM_DIRECTORY/(.*)\\/(.*)$/$2/}",
+      ""
+    ]
+  },
+  "Sequelize Transaction": {
+    "prefix": "seq-transaction",
+    "body": [
+      "return sequelize.transaction(transaction => {",
+      "",
+      "})"
+    ]
+  },
+  "Digital Store Controller Method": {
+    "prefix": "controllerx",
+    "body": [
+        "${1:methodName} = ({ logger = createLogger() }) => {",
+        "  logger = logger.clone('${2:controller}.${1:methodName}')",
+        "  logger.debug(`begin ${1:methodName}`)",
+        "  return sequelize.transaction(transaction => {",
+        "    return ${3:service}",
+        "      .${1:methodName}({ transaction, logger })",
+        "      .then(result => {",
+        "        logger.debug(`${1:methodName} success`)",
+        "        return result",
+        "      })",
+        "      .catch(error => {",
+        "        throw new DigitalStoreError({ ...errors.${4:errorType} })",
+        "      })",
+        "    })",
+        "    .catch(error => {",
+        "      logger.error(`${1:methodName} fail`, error)",
+        "      throw error",
+        "    })",
+        "}"
+    ]
+  }
+  }
+  
+  
+  
+  
